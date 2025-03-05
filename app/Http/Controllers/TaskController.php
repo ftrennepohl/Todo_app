@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
-    public function getTasks():Response
+    public function get():Response
     {
         return Inertia::render('Task/Tasks', [
             'tasks' => DB::table('tasks')
@@ -37,7 +37,7 @@ class TaskController extends Controller
         ]);
     }
 
-    public function insertTask(Request $request):RedirectResponse
+    public function insert(Request $request):RedirectResponse
     {
         $request->validate([
             'titulo'        => 'min:5',
@@ -55,7 +55,7 @@ class TaskController extends Controller
         return to_route('tasks.index');
     }
 
-    public function updateTask(Request $request):RedirectResponse
+    public function update(Request $request):RedirectResponse
     {
         $task = Task::find($request->input('id'));
         $task->id = $request->input('id');
@@ -68,7 +68,7 @@ class TaskController extends Controller
         return to_route('tasks.index', null, 303);
     }
 
-    public function deleteTask(Request $request):RedirectResponse
+    public function destroy(Request $request):RedirectResponse
     {
         $task = Task::findOrFail($request->id);
         $task->delete();

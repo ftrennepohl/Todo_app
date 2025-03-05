@@ -33,18 +33,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::controller(TaskController::class)->group(function () {
 
-        Route::get('/tasks', 'getTasks')->name('tasks.index');
-        Route::put('/tasks', 'updateTask');
-        Route::delete('/tasks/{id}', 'deleteTask');
-        Route::post('/tasks', 'insertTask');
+        Route::get('/tasks', 'get')->name('tasks.index');
+        Route::put('/tasks', 'update');
+        Route::delete('/tasks/{id}', 'destroy');
+        Route::post('/tasks', 'insert');
 
     });
 
     Route::controller(CategoryController::class)->group(function () {
 
-        Route::get('/categories', 'getCategories')->name('categories.index');
-        Route::post('/categories', 'insertCategory');
-        Route::delete('/categories/{id}', 'deleteCategory');
+        Route::get('/categories', 'get')->name('categories.index');
+        Route::post('/categories', 'insert');
+        Route::delete('/categories/{id}', 'destroy');
 
     });
 

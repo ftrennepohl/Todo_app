@@ -12,13 +12,13 @@ use Inertia\Response;
 
 class CategoryController extends Controller
 {
-    public function getCategories():Response
+    public function get():Response
     {
         return Inertia::render('Task/NewCategoryForm', [
             'categories' => DB::table('categories')->orderBy('created_at')->get()]);
     }
 
-    public function insertCategory(Request $request):RedirectResponse
+    public function insert(Request $request):RedirectResponse
     {
         $category = new Category;
         $category->name = $request->input('name');
@@ -26,7 +26,7 @@ class CategoryController extends Controller
         return to_route('categories.index');
     }
 
-    public function updateCategory(Request $request):RedirectResponse
+    public function update(Request $request):RedirectResponse
     {
         $category = Category::find($request->input('id'));
         $category->name = $request->input('name');
@@ -34,7 +34,7 @@ class CategoryController extends Controller
         return to_route('categories.index', null, 303);
     }
 
-    public function deleteCategory(Request $request):RedirectResponse
+    public function destroy(Request $request):RedirectResponse
     {
         $category = Category::findOrFail($request->id);
         $category->delete();
